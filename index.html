@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <title>Vanilla JavaScript App</title>
+    </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
-</head>
+    <body>
+        <main>
+            <h1>Vanilla JavaScript App</h1>
+            <button onclick="myFunction()">Click me</button>
 
-<body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
-  </main>
-</body>
+            <p id="demo"></p>
+        </main>
 
+        <script>
+            function myFunction() {
+                fetch("https://testcorsinazure.azurewebsites.net/api/GetMessage", {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        Accept: "application/json, text/plain, */*",
+                        // Authorization: "Bearer " + jsonresponse[0].access_token,
+                    },
+                    // body: JSON.stringify({
+                    //     "last-name": lastName,
+                    //     "first-name": firstName,
+                    //     "middle-initial": middleName,
+                    //     ssn: ssn,
+                    //     city: city,
+                    //     state,
+                    //     state,
+                    //     zip: zipCode,
+                    //     street: address,
+                    // }),
+                })
+                    .then(async (res) => res.text())
+                    .then((res) => {
+                        document.getElementById("demo").innerHTML = res;
+                    });
+            }
+        </script>
+    </body>
 </html>
